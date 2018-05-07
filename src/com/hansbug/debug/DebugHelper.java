@@ -307,7 +307,7 @@ public abstract class DebugHelper {
      * @param debug_info  debug信息
      * @param print_switch print开关，当不需要输出时可以立即关掉
      */
-    public static void dPrintln(int debug_number, int print_switch, String debug_info) {
+    public static void dPrintln(int debug_level, int print_switch, String debug_info) {
         StackTraceElement[] trace_list = new Throwable().getStackTrace();
         StackTraceElement trace = trace_list[1];
         String class_method;
@@ -325,7 +325,7 @@ public abstract class DebugHelper {
             String output = String.join("", new String[]{
                     debug_level_str, (show_thread ? thread_information : ""), debug_location, " " + debug_info
             });
-            if(print_switch){
+            if(print_switch == 0){
                 System.out.println(output);
             }
             logger(String.format("[DEBUG OUTPUT] %s", output));
